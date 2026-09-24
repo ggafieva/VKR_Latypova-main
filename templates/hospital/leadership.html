@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container page-layout">
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <h3>О больнице</h3>
+            <ul>
+                <li><a href="{% url 'hospital:about' %}">История</a></li>
+                <li><a href="{% url 'hospital:leadership' %}" class="active">Руководство</a></li>
+                <li><a href="{% url 'hospital:departments' %}">Отделения</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <div class="page-content">
+        <h1>Руководство</h1>
+        <div class="leadership-grid">
+            {% for leader in leaders %}
+            <article class="leader-card">
+                <div class="leader-photo">
+                    {% if leader.photo %}
+                    <img src="{{ leader.photo.url }}" alt="{{ leader.full_name }}">
+                    {% else %}
+                    <div class="photo-placeholder">{{ leader.full_name|slice:":1" }}</div>
+                    {% endif %}
+                </div>
+                <div class="leader-info">
+                    <h2>{{ leader.full_name }}</h2>
+                    <p class="position">{{ leader.position }}</p>
+                    <p>{{ leader.bio|linebreaks }}</p>
+                    {% if leader.phone %}<p>Тел.: {{ leader.phone }}</p>{% endif %}
+                    {% if leader.email %}<p>Email: {{ leader.email }}</p>{% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

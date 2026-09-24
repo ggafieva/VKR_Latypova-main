@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container panel-layout">
+    {% include 'panel/includes/sidebar.html' %}
+    <div class="panel-content">
+        <h1>Удалить материал?</h1>
+        <p>Вы уверены, что хотите удалить <strong>«{{ item.title }}»</strong>?</p>
+        <p class="help-text">Это действие нельзя отменить. Страница на сайте перестанет открываться.</p>
+        <form method="post" class="panel-actions">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Да, удалить</button>
+            <a href="{% url 'panel:patient_info' %}" class="btn btn-outline-dark">Отмена</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

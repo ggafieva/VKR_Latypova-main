@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container cabinet-layout">
+    {% include 'accounts/includes/cabinet_sidebar.html' %}
+    <div class="cabinet-content">
+        <h1>Личный кабинет администратора</h1>
+        <div class="stats-grid">
+            <div class="stat-card"><span class="stat-num">{{ doctors_count }}</span><span class="stat-label">Врачей</span></div>
+            <div class="stat-card"><span class="stat-num">{{ appointments_count }}</span><span class="stat-label">Записей</span></div>
+            <div class="stat-card"><span class="stat-num">{{ feedbacks_count }}</span><span class="stat-label">Новых заявок</span></div>
+        </div>
+        <a href="{% url 'panel:dashboard' %}" class="btn btn-primary">Перейти в админ-панель</a>
+    </div>
+</div>
+{% endblock %}

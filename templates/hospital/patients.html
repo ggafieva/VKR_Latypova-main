@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container page-layout">
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <h3>Пациентам</h3>
+            <ul>
+                {% for item in info_items %}
+                <li><a href="{% url 'hospital:patient_detail' item.slug %}">{{ item.title }}</a></li>
+                {% endfor %}
+                <li><a href="{% url 'hospital:services' %}">Услуги</a></li>
+                <li><a href="{% url 'hospital:schedule' %}">Расписание</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <div class="page-content">
+        <h1 class="page-title-green">Пациентам</h1>
+        <p>Полезная информация и памятки для посетителей {{ site_name_short }}.</p>
+
+        <div class="patient-memo-list">
+            {% for item in info_items %}
+            <article class="patient-memo-item">
+                {% if item.has_attachment %}
+                <h2 class="patient-memo-title">{{ item.title }}</h2>
+                <div class="patient-memo-download">
+                    <span class="file-icon file-icon-{{ item.file_extension|default:'file' }}" aria-hidden="true"></span>
+                    <a href="{{ item.attachment.url }}" class="download-link" download>Скачать файл</a>
+                </div>
+                {% elif item.content %}
+                <h2 class="patient-memo-title">
+                    <a href="{% url 'hospital:patient_detail' item.slug %}">{{ item.title }}</a>
+                </h2>
+                {% else %}
+                <h2 class="patient-memo-title">
+                    <a href="{% url 'hospital:patient_detail' item.slug %}">{{ item.title }}</a>
+                </h2>
+                {% endif %}
+                {% if item.content and item.has_attachment %}
+                <p class="patient-memo-excerpt">
+                    <a href="{% url 'hospital:patient_detail' item.slug %}">Подробнее на странице материала →</a>
+                </p>
+                {% endif %}
+            </article>
+            {% empty %}
+            <p>Материалы пока не добавлены.</p>
+            {% endfor %}
+        </div>
+
+        <h2 class="section-subtitle">Медицинские услуги</h2>
+        <ul class="services-list">
+            {% for service in services %}
+            <li><strong>{{ service.name }}</strong>{% if service.price %} — от {{ service.price }} ₽{% endif %}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

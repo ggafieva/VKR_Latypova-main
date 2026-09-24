@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero">
+    <div class="container hero-inner">
+        <div class="hero-text">
+            <h1>{{ site_name }}</h1>
+            <p>Качественная медицинская помощь жителям Атнинского района Республики Татарстан с 1952 года.</p>
+            <div class="hero-actions">
+                <a href="{% url 'hospital:doctors' %}" class="btn btn-primary">Наши врачи</a>
+                <a href="{% url 'hospital:schedule' %}" class="btn btn-outline">Расписание</a>
+            </div>
+        </div>
+        <div class="hero-card">
+            <h3>Запись на приём</h3>
+            <p>Запишитесь к специалисту через личный кабинет или по телефону регистратуры.</p>
+            <a href="{% if user.is_authenticated %}{% url 'accounts:appointment_create' %}{% else %}{% url 'accounts:login' %}?next={% url 'accounts:appointment_create' %}{% endif %}" class="btn btn-primary btn-block">Записаться</a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Отделения</h2>
+        <div class="cards-grid">
+            {% for dept in departments %}
+            <article class="card">
+                <h3><a href="{% url 'hospital:department_detail' dept.slug %}">{{ dept.name }}</a></h3>
+                <p>{{ dept.description|truncatewords:25 }}</p>
+                {% if dept.phone %}<p class="card-meta">Тел.: {{ dept.phone }}</p>{% endif %}
+            </article>
+            {% endfor %}
+        </div>
+        <p class="text-center"><a href="{% url 'hospital:departments' %}" class="link-more">Все отделения →</a></p>
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="container">
+        <h2 class="section-title">Наши специалисты</h2>
+        <div class="doctors-grid">
+            {% for doctor in doctors %}
+            <article class="doctor-card">
+                <div class="doctor-photo">{% if doctor.photo %}<img src="{{ doctor.photo.url }}" alt="{{ doctor.full_name }}">{% else %}<div class="photo-placeholder">{{ doctor.full_name|slice:":1" }}</div>{% endif %}</div>
+                <h3><a href="{% url 'hospital:doctor_detail' doctor.slug %}">{{ doctor.full_name }}</a></h3>
+                <p class="specialty">{{ doctor.specialty }}</p>
+                <p class="department">{{ doctor.department.name }}</p>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Новости</h2>
+        <div class="news-grid">
+            {% for news in news_list %}
+            <article class="news-card">
+                <time datetime="{{ news.created_at|date:'Y-m-d' }}">{{ news.created_at|date:'d.m.Y' }}</time>
+                <h3><a href="{% url 'hospital:news_detail' news.slug %}">{{ news.title }}</a></h3>
+                <p>{{ news.excerpt|default:news.content|truncatewords:20 }}</p>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="container">
+        <h2 class="section-title">Популярные услуги</h2>
+        <ul class="services-list">
+            {% for service in services %}
+            <li><strong>{{ service.name }}</strong> — {{ service.description|truncatewords:15 }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endblock %}

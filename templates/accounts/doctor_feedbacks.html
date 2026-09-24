@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container cabinet-layout">
+    {% include 'accounts/includes/cabinet_sidebar.html' %}
+    <div class="cabinet-content">
+        <h1>Заявки обратной связи</h1>
+        <table class="data-table">
+            <thead><tr><th>Дата</th><th>Имя</th><th>Тема</th><th>Статус</th><th>Сообщение</th></tr></thead>
+            <tbody>
+                {% for f in feedbacks %}
+                <tr>
+                    <td>{{ f.created_at|date:"d.m.Y" }}</td>
+                    <td>{{ f.name }}</td>
+                    <td>{{ f.subject }}</td>
+                    <td>{{ f.get_status_display }}</td>
+                    <td>{{ f.message|truncatewords:15 }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5">Заявок нет.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

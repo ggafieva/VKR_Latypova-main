@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ page_title|default:"Главная" }}{% endblock %} — {{ site_name_short }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="{% url 'hospital:home' %}" class="logo">
+                <span class="logo-icon">+</span>
+                <span class="logo-text">{{ site_name_short }}</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Меню">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="main-nav" id="mainNav">
+                <ul class="nav-list">
+                    <li><a href="{% url 'hospital:home' %}">Главная</a></li>
+                    <li class="has-dropdown">
+                        <a href="{% url 'hospital:about' %}">О больнице</a>
+                        <ul class="dropdown">
+                            <li><a href="{% url 'hospital:about' %}">История</a></li>
+                            <li><a href="{% url 'hospital:leadership' %}">Руководство</a></li>
+                            <li><a href="{% url 'hospital:news' %}">Новости</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="{% url 'hospital:departments' %}">Отделения</a>
+                        <ul class="dropdown">
+                            {% for dept in departments_menu %}
+                            <li><a href="{% url 'hospital:department_detail' dept.slug %}">{{ dept.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><a href="{% url 'hospital:doctors' %}">Врачи</a></li>
+                    <li><a href="{% url 'hospital:schedule' %}">Расписание</a></li>
+                    <li><a href="{% url 'hospital:services' %}">Услуги</a></li>
+                    <li><a href="{% url 'hospital:patients' %}">Пациентам</a></li>
+                    <li><a href="{% url 'hospital:contacts' %}">Контакты</a></li>
+                    <li><a href="{% url 'hospital:feedback' %}">Обратная связь</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="has-dropdown">
+                        <a href="{% url 'accounts:dashboard' %}">Кабинет</a>
+                        <ul class="dropdown">
+                            <li><a href="{% url 'accounts:profile' %}">Профиль</a></li>
+                            {% if user.is_admin_role %}
+                            <li><a href="{% url 'panel:dashboard' %}">Админ-панель</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'accounts:logout' %}">Выход</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li><a href="{% url 'accounts:login' %}" class="btn-login">Вход</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    {% if messages %}
+    <div class="container messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block breadcrumbs %}
+    {% if breadcrumbs %}
+    <nav class="breadcrumbs container" aria-label="Хлебные крошки">
+        {% for label, url_name in breadcrumbs %}
+            {% if url_name %}
+            <a href="{% url url_name %}">{{ label }}</a>
+            {% else %}
+            <span>{{ label }}</span>
+            {% endif %}
+            {% if not forloop.last %}<span class="sep">/</span>{% endif %}
+        {% endfor %}
+    </nav>
+    {% endif %}
+    {% endblock %}
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3>{{ site_name_short }}</h3>
+                <p>{{ site_address }}</p>
+                <p>Тел.: +7 (843) 522-12-34</p>
+            </div>
+            <div class="footer-col">
+                <h3>Разделы</h3>
+                <ul>
+                    <li><a href="{% url 'hospital:doctors' %}">Врачи</a></li>
+                    <li><a href="{% url 'hospital:schedule' %}">Расписание</a></li>
+                    <li><a href="{% url 'hospital:feedback' %}">Обратная связь</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Режим работы</h3>
+                <p>Пн–Пт: 8:00–18:00</p>
+                <p>Сб: 9:00–14:00</p>
+                <p>Неотложная помощь: круглосуточно</p>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>&copy; 2025 {{ site_name_short }}. {{ site_author }}</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

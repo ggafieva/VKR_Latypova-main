@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container panel-layout">
+    {% include 'panel/includes/sidebar.html' %}
+    <div class="panel-content">
+        <h1>{{ page_title }}</h1>
+        <p><a href="{% url 'panel:departments' %}">← К списку отделений</a></p>
+        <form method="post" class="form department-form">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group{% if field.name == 'is_active' %} form-check{% endif %}">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}<span class="field-error">{{ field.errors.0 }}</span>{% endif %}
+                {% if field.name == 'slug' %}<small class="help-text">Латиница, например: terapevticheskoe</small>{% endif %}
+                {% if field.name == 'beds_count' %}<small class="help-text">Для поликлинических отделений укажите 0</small>{% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

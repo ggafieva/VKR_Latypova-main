@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container panel-layout">
+    {% include 'panel/includes/sidebar.html' %}
+    <div class="panel-content">
+        <h1>Панель администратора</h1>
+        <div class="stats-grid">
+            <div class="stat-card"><span class="stat-num">{{ stats.departments }}</span><span class="stat-label">Отделений</span></div>
+            <div class="stat-card"><span class="stat-num">{{ stats.doctors }}</span><span class="stat-label">Врачей</span></div>
+            <div class="stat-card"><span class="stat-num">{{ stats.users }}</span><span class="stat-label">Пользователей</span></div>
+            <div class="stat-card"><span class="stat-num">{{ stats.feedbacks }}</span><span class="stat-label">Новых заявок</span></div>
+        </div>
+        <div class="panel-actions">
+            <a href="{% url 'panel:departments' %}" class="btn btn-primary">Состав больницы</a>
+            <a href="{% url 'panel:feedback_report' %}" class="btn btn-outline-dark">Скачать отчёт XLSX</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container panel-layout">
+    {% include 'panel/includes/sidebar.html' %}
+    <div class="panel-content">
+        <div class="panel-header-row">
+            <h1>Информация для пациентов</h1>
+            <a href="{% url 'panel:patient_info_create' %}" class="btn btn-primary">Добавить материал</a>
+        </div>
+        <p class="help-text">Материалы отображаются на странице <a href="{% url 'hospital:patients' %}" target="_blank">«Пациентам»</a></p>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Заголовок</th>
+                    <th>Категория</th>
+                    <th>Порядок</th>
+                    <th>Активно</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>
+                        <a href="{% url 'hospital:patient_detail' item.slug %}" target="_blank">{{ item.title }}</a>
+                        {% if item.has_attachment %}<br><small>📎 есть файл</small>{% endif %}
+                    </td>
+                    <td>{{ item.category|default:"—" }}</td>
+                    <td>{{ item.order }}</td>
+                    <td>{% if item.is_active %}Да{% else %}Нет{% endif %}</td>
+                    <td class="actions-cell">
+                        <a href="{% url 'panel:patient_info_edit' item.pk %}" class="btn btn-sm btn-primary">Изменить</a>
+                        <a href="{% url 'panel:patient_info_toggle' item.pk %}" class="btn btn-sm btn-outline-dark">
+                            {% if item.is_active %}Скрыть{% else %}Показать{% endif %}
+                        </a>
+                        <a href="{% url 'panel:patient_info_delete' item.pk %}" class="btn btn-sm btn-danger">Удалить</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">
+                        Материалов нет.
+                        <a href="{% url 'panel:patient_info_create' %}">Добавить первый</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

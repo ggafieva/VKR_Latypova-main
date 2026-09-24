@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container panel-layout">
+    {% include 'panel/includes/sidebar.html' %}
+    <div class="panel-content">
+        <h1>Заявки обратной связи</h1>
+        <div class="panel-actions">
+            <a href="{% url 'panel:feedback_report' %}" class="btn btn-primary">Скачать отчёт XLSX</a>
+            <form method="get" action="{% url 'panel:feedback_report' %}" class="inline-form">
+                <input type="date" name="date_from" class="form-control">
+                <input type="date" name="date_to" class="form-control">
+                <button type="submit" class="btn btn-outline">Отчёт за период</button>
+            </form>
+        </div>
+        {% for f in feedbacks %}
+        <article class="feedback-card">
+            <header>
+                <strong>{{ f.subject }}</strong> — {{ f.name }} ({{ f.created_at|date:"d.m.Y H:i" }})
+                <span class="badge badge-{{ f.status }}">{{ f.get_status_display }}</span>
+            </header>
+            <p>{{ f.message }}</p>
+            <p><small>{{ f.email }} {% if f.phone %}| {{ f.phone }}{% endif %}</small></p>
+            <form method="post" class="inline-form">
+                {% csrf_token %}
+                <input type="hidden" name="feedback_id" value="{{ f.pk }}">
+                <select name="status" class="form-control">
+                    {% for code, label in status_choices %}
+                    <option value="{{ code }}" {% if f.status == code %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+                <input type="text" name="admin_comment" value="{{ f.admin_comment }}" placeholder="Комментарий" class="form-control">
+                <button type="submit" class="btn btn-sm">Обновить</button>
+            </form>
+        </article>
+        {% empty %}
+        <p>Заявок нет.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

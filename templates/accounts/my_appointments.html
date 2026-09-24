@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container cabinet-layout">
+    {% include 'accounts/includes/cabinet_sidebar.html' %}
+    <div class="cabinet-content">
+        <h1>Мои заявки к врачу</h1>
+        <a href="{% url 'accounts:appointment_create' %}" class="btn btn-primary">Новая запись</a>
+        <table class="data-table">
+            <thead><tr><th>Врач</th><th>Дата</th><th>Время</th><th>Причина</th><th>Статус</th></tr></thead>
+            <tbody>
+                {% for a in appointments %}
+                <tr>
+                    <td>{{ a.doctor.full_name }}</td>
+                    <td>{{ a.appointment_date|date:"d.m.Y" }}</td>
+                    <td>{{ a.appointment_time|time:"H:i" }}</td>
+                    <td>{{ a.reason|truncatewords:10 }}</td>
+                    <td><span class="badge badge-{{ a.status }}">{{ a.get_status_display }}</span></td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5">Заявок пока нет.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

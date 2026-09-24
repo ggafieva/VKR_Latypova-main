@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container page-layout">
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <h3>Фильтр</h3>
+            <ul>
+                <li><a href="{% url 'hospital:doctors' %}" {% if not selected_department %}class="active"{% endif %}>Все врачи</a></li>
+                {% for dept in departments %}
+                <li><a href="?department={{ dept.slug }}" {% if selected_department == dept.slug %}class="active"{% endif %}>{{ dept.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </aside>
+    <div class="page-content">
+        <h1>Врачи</h1>
+        <div class="doctors-grid">
+            {% for doctor in doctors %}
+            <article class="doctor-card">
+                <div class="doctor-photo">
+                    {% if doctor.photo %}<img src="{{ doctor.photo.url }}" alt="{{ doctor.full_name }}">{% else %}<div class="photo-placeholder">{{ doctor.full_name|slice:":1" }}</div>{% endif %}
+                </div>
+                <h2><a href="{% url 'hospital:doctor_detail' doctor.slug %}">{{ doctor.full_name }}</a></h2>
+                <p class="specialty">{{ doctor.specialty }}</p>
+                <p class="department">{{ doctor.department.name }}</p>
+                <p>Стаж: {{ doctor.experience_years }} лет</p>
+            </article>
+            {% empty %}
+            <p>Врачи не найдены.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

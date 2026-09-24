@@ -1,0 +1,719 @@
+[
+{
+  "model": "accounts.role",
+  "pk": 1,
+  "fields": {
+    "code": "admin",
+    "name": "Администратор",
+    "description": ""
+  }
+},
+{
+  "model": "accounts.role",
+  "pk": 2,
+  "fields": {
+    "code": "doctor",
+    "name": "Врач",
+    "description": ""
+  }
+},
+{
+  "model": "accounts.role",
+  "pk": 3,
+  "fields": {
+    "code": "patient",
+    "name": "Пользователь/Пациент",
+    "description": ""
+  }
+},
+{
+  "model": "accounts.customuser",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$mREdjr9ghxaWfn62T8F7q4$vkam8o2GAOS385KAX1k1ZBx9+q+Lw2EChamJgLPhSPc=",
+    "last_login": "2026-05-27T12:31:42.379Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "Админ",
+    "last_name": "Системный",
+    "email": "admin@crb-atnya.ru",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-05-27T12:31:04.713Z",
+    "role": 1,
+    "phone": "",
+    "birth_date": null,
+    "address": "",
+    "email_notifications": true,
+    "sms_notifications": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$deQTGEvvXmu3ZNMpghzlgY$zH8UtuZUYS6dDWZQ0YfR9FwEpGv1WYSo41dMgPvApUU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "doctor1",
+    "first_name": "Айрат",
+    "last_name": "Гарифуллин",
+    "email": "doctor1@crb-atnya.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-27T12:31:05.119Z",
+    "role": 2,
+    "phone": "",
+    "birth_date": null,
+    "address": "",
+    "email_notifications": true,
+    "sms_notifications": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$cyBaax3fAniNy7Bu6xywnX$MyUiceuNLseE93sr+gSIAL4ifQ8mR6/F0WYljIickqo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "patient1",
+    "first_name": "Мария",
+    "last_name": "Сидорова",
+    "email": "patient1@mail.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-27T12:31:05.491Z",
+    "role": 3,
+    "phone": "+7 (843) 522-12-99",
+    "birth_date": null,
+    "address": "",
+    "email_notifications": true,
+    "sms_notifications": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "hospital.department",
+  "pk": 1,
+  "fields": {
+    "name": "Терапевтическое отделение",
+    "slug": "terapevticheskoe",
+    "description": "Оказывает первичную медико-санитарную помощь взрослому населению.",
+    "phone": "+7 (843) 522-12-40",
+    "floor": "1",
+    "is_active": true,
+    "order": 0
+  }
+},
+{
+  "model": "hospital.department",
+  "pk": 2,
+  "fields": {
+    "name": "Педиатрическое отделение",
+    "slug": "pediatricheskoe",
+    "description": "Медицинская помощь детям от 0 до 18 лет.",
+    "phone": "+7 (843) 522-12-41",
+    "floor": "2",
+    "is_active": true,
+    "order": 1
+  }
+},
+{
+  "model": "hospital.department",
+  "pk": 3,
+  "fields": {
+    "name": "Хирургическое отделение",
+    "slug": "hirurgicheskoe",
+    "description": "Плановые и экстренные хирургические вмешательства.",
+    "phone": "+7 (843) 522-12-42",
+    "floor": "3",
+    "is_active": true,
+    "order": 2
+  }
+},
+{
+  "model": "hospital.department",
+  "pk": 4,
+  "fields": {
+    "name": "Стационар",
+    "slug": "stacionar",
+    "description": "Круглосуточный стационар на 120 коек.",
+    "phone": "+7 (843) 522-12-43",
+    "floor": "2-3",
+    "is_active": true,
+    "order": 3
+  }
+},
+{
+  "model": "hospital.department",
+  "pk": 5,
+  "fields": {
+    "name": "Клинико-диагностическая лаборатория",
+    "slug": "laboratoriya",
+    "description": "Лабораторные исследования и анализы.",
+    "phone": "+7 (843) 522-12-44",
+    "floor": "1",
+    "is_active": true,
+    "order": 4
+  }
+},
+{
+  "model": "hospital.department",
+  "pk": 6,
+  "fields": {
+    "name": "Рентгенологический кабинет",
+    "slug": "rentgen",
+    "description": "Рентгенография, флюорография, КТ.",
+    "phone": "+7 (843) 522-12-45",
+    "floor": "1",
+    "is_active": true,
+    "order": 5
+  }
+},
+{
+  "model": "hospital.leadership",
+  "pk": 1,
+  "fields": {
+    "full_name": "Хафизов Ринат Равилевич",
+    "position": "Главный врач",
+    "bio": "Высшее медицинское образование, стаж 25 лет. Организатор здравоохранения.",
+    "phone": "",
+    "email": "",
+    "photo": "",
+    "order": 0
+  }
+},
+{
+  "model": "hospital.leadership",
+  "pk": 2,
+  "fields": {
+    "full_name": "Ахметова Лилия Минзакировна",
+    "position": "Заместитель главного врача по медицинской части",
+    "bio": "Кандидат медицинских наук, врач-терапевт высшей категории.",
+    "phone": "",
+    "email": "",
+    "photo": "",
+    "order": 1
+  }
+},
+{
+  "model": "hospital.leadership",
+  "pk": 3,
+  "fields": {
+    "full_name": "Сафин Ильдар Фаритович",
+    "position": "Заместитель главного врача по экономике",
+    "bio": "Организация финансово-хозяйственной деятельности учреждения.",
+    "phone": "",
+    "email": "",
+    "photo": "",
+    "order": 2
+  }
+},
+{
+  "model": "hospital.doctor",
+  "pk": 1,
+  "fields": {
+    "user": 2,
+    "department": 1,
+    "full_name": "Гарифуллин Айрат Рашитович",
+    "slug": "garifullin-ajrat",
+    "specialty": "Врач-терапевт",
+    "qualification": "Высшая категория",
+    "experience_years": 18,
+    "bio": "Гарифуллин Айрат Рашитович работает в Атнинской ЦРБ более 18 лет. Специализируется на диагностике и лечении пациентов.",
+    "education": "Казанский государственный медицинский университет",
+    "photo": "",
+    "phone": "+7 (843) 522-12-01",
+    "cabinet": "101",
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.doctor",
+  "pk": 2,
+  "fields": {
+    "user": null,
+    "department": 1,
+    "full_name": "Сафина Гузель Маратовна",
+    "slug": "safina-guzel",
+    "specialty": "Врач-терапевт",
+    "qualification": "Первая категория",
+    "experience_years": 12,
+    "bio": "Сафина Гузель Маратовна работает в Атнинской ЦРБ более 12 лет. Специализируется на диагностике и лечении пациентов.",
+    "education": "Казанский государственный медицинский университет",
+    "photo": "",
+    "phone": "+7 (843) 522-12-02",
+    "cabinet": "102",
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.doctor",
+  "pk": 3,
+  "fields": {
+    "user": null,
+    "department": 2,
+    "full_name": "Нуруллин Рустем Ильдарович",
+    "slug": "nurullin-rustem",
+    "specialty": "Врач-педиатр",
+    "qualification": "Высшая категория",
+    "experience_years": 15,
+    "bio": "Нуруллин Рустем Ильдарович работает в Атнинской ЦРБ более 15 лет. Специализируется на диагностике и лечении пациентов.",
+    "education": "Казанский государственный медицинский университет",
+    "photo": "",
+    "phone": "+7 (843) 522-12-01",
+    "cabinet": "201",
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.doctor",
+  "pk": 4,
+  "fields": {
+    "user": null,
+    "department": 2,
+    "full_name": "Хакимова Алина Ринатовна",
+    "slug": "hakimova-alina",
+    "specialty": "Врач-педиатр",
+    "qualification": "Вторая категория",
+    "experience_years": 8,
+    "bio": "Хакимова Алина Ринатовна работает в Атнинской ЦРБ более 8 лет. Специализируется на диагностике и лечении пациентов.",
+    "education": "Казанский государственный медицинский университет",
+    "photo": "",
+    "phone": "+7 (843) 522-12-02",
+    "cabinet": "202",
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.doctor",
+  "pk": 5,
+  "fields": {
+    "user": null,
+    "department": 3,
+    "full_name": "Валеев Марсель Ринатович",
+    "slug": "valeev-marcel",
+    "specialty": "Врач-хирург",
+    "qualification": "Высшая категория",
+    "experience_years": 20,
+    "bio": "Валеев Марсель Ринатович работает в Атнинской ЦРБ более 20 лет. Специализируется на диагностике и лечении пациентов.",
+    "education": "Казанский государственный медицинский университет",
+    "photo": "",
+    "phone": "+7 (843) 522-12-01",
+    "cabinet": "301",
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.doctor",
+  "pk": 6,
+  "fields": {
+    "user": null,
+    "department": 5,
+    "full_name": "Гимазова Лилия Фанисовна",
+    "slug": "gimazova-liliya",
+    "specialty": "Врач-клинический лабораторный диагност",
+    "qualification": "Первая категория",
+    "experience_years": 10,
+    "bio": "Гимазова Лилия Фанисовна работает в Атнинской ЦРБ более 10 лет. Специализируется на диагностике и лечении пациентов.",
+    "education": "Казанский государственный медицинский университет",
+    "photo": "",
+    "phone": "+7 (843) 522-12-05",
+    "cabinet": "105",
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.schedule",
+  "pk": 1,
+  "fields": {
+    "doctor": 1,
+    "day_of_week": 0,
+    "start_time": "08:00:00",
+    "end_time": "14:00:00",
+    "room": "101",
+    "notes": ""
+  }
+},
+{
+  "model": "hospital.schedule",
+  "pk": 2,
+  "fields": {
+    "doctor": 1,
+    "day_of_week": 2,
+    "start_time": "08:00:00",
+    "end_time": "14:00:00",
+    "room": "101",
+    "notes": ""
+  }
+},
+{
+  "model": "hospital.schedule",
+  "pk": 3,
+  "fields": {
+    "doctor": 1,
+    "day_of_week": 4,
+    "start_time": "08:00:00",
+    "end_time": "12:00:00",
+    "room": "101",
+    "notes": ""
+  }
+},
+{
+  "model": "hospital.schedule",
+  "pk": 4,
+  "fields": {
+    "doctor": 2,
+    "day_of_week": 1,
+    "start_time": "09:00:00",
+    "end_time": "15:00:00",
+    "room": "102",
+    "notes": ""
+  }
+},
+{
+  "model": "hospital.schedule",
+  "pk": 5,
+  "fields": {
+    "doctor": 2,
+    "day_of_week": 3,
+    "start_time": "09:00:00",
+    "end_time": "15:00:00",
+    "room": "102",
+    "notes": ""
+  }
+},
+{
+  "model": "hospital.schedule",
+  "pk": 6,
+  "fields": {
+    "doctor": 3,
+    "day_of_week": 0,
+    "start_time": "08:30:00",
+    "end_time": "13:30:00",
+    "room": "201",
+    "notes": ""
+  }
+},
+{
+  "model": "hospital.schedule",
+  "pk": 7,
+  "fields": {
+    "doctor": 3,
+    "day_of_week": 2,
+    "start_time": "08:30:00",
+    "end_time": "13:30:00",
+    "room": "201",
+    "notes": ""
+  }
+},
+{
+  "model": "hospital.schedule",
+  "pk": 8,
+  "fields": {
+    "doctor": 3,
+    "day_of_week": 4,
+    "start_time": "08:30:00",
+    "end_time": "12:30:00",
+    "room": "201",
+    "notes": ""
+  }
+},
+{
+  "model": "hospital.schedule",
+  "pk": 9,
+  "fields": {
+    "doctor": 4,
+    "day_of_week": 1,
+    "start_time": "10:00:00",
+    "end_time": "16:00:00",
+    "room": "202",
+    "notes": ""
+  }
+},
+{
+  "model": "hospital.schedule",
+  "pk": 10,
+  "fields": {
+    "doctor": 4,
+    "day_of_week": 3,
+    "start_time": "10:00:00",
+    "end_time": "16:00:00",
+    "room": "202",
+    "notes": ""
+  }
+},
+{
+  "model": "hospital.schedule",
+  "pk": 11,
+  "fields": {
+    "doctor": 5,
+    "day_of_week": 1,
+    "start_time": "08:00:00",
+    "end_time": "14:00:00",
+    "room": "301",
+    "notes": ""
+  }
+},
+{
+  "model": "hospital.schedule",
+  "pk": 12,
+  "fields": {
+    "doctor": 5,
+    "day_of_week": 3,
+    "start_time": "08:00:00",
+    "end_time": "14:00:00",
+    "room": "301",
+    "notes": ""
+  }
+},
+{
+  "model": "hospital.schedule",
+  "pk": 13,
+  "fields": {
+    "doctor": 5,
+    "day_of_week": 5,
+    "start_time": "09:00:00",
+    "end_time": "12:00:00",
+    "room": "301",
+    "notes": ""
+  }
+},
+{
+  "model": "hospital.service",
+  "pk": 1,
+  "fields": {
+    "name": "Приём терапевта",
+    "department": 1,
+    "description": "Первичный и повторный приём врача-терапевта.",
+    "price": null,
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.service",
+  "pk": 2,
+  "fields": {
+    "name": "Приём педиатра",
+    "department": 2,
+    "description": "Консультация и осмотр ребёнка.",
+    "price": null,
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.service",
+  "pk": 3,
+  "fields": {
+    "name": "Общий анализ крови",
+    "department": 5,
+    "description": "Клинический анализ крови с лейкоцитарной формулой.",
+    "price": null,
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.service",
+  "pk": 4,
+  "fields": {
+    "name": "Флюорография",
+    "department": 6,
+    "description": "Рентгенологическое исследование органов грудной клетки.",
+    "price": null,
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.service",
+  "pk": 5,
+  "fields": {
+    "name": "ЭКГ",
+    "department": 1,
+    "description": "Электрокардиография в 12 отведениях.",
+    "price": null,
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.service",
+  "pk": 6,
+  "fields": {
+    "name": "Хирургическая консультация",
+    "department": 3,
+    "description": "Осмотр и консультация хирурга.",
+    "price": null,
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.news",
+  "pk": 1,
+  "fields": {
+    "title": "Вакцинация детей по календарю прививок",
+    "slug": "vakcinaciya-detej",
+    "content": "С 1 сентября в поликлинике проводится вакцинация детей согласно национальному календарю.",
+    "excerpt": "С 1 сентября в поликлинике проводится вакцинация детей согласно национальному календарю.",
+    "image": "",
+    "author": 1,
+    "is_published": true,
+    "created_at": "2026-05-27T12:31:06.114Z",
+    "updated_at": "2026-05-27T12:31:06.114Z"
+  }
+},
+{
+  "model": "hospital.news",
+  "pk": 2,
+  "fields": {
+    "title": "Новое диагностическое оборудование в лаборатории",
+    "slug": "novoe-oborudovanie",
+    "content": "Лаборатория оснащена современным автоматическим анализатором.",
+    "excerpt": "Лаборатория оснащена современным автоматическим анализатором.",
+    "image": "",
+    "author": 1,
+    "is_published": true,
+    "created_at": "2026-05-27T12:31:06.120Z",
+    "updated_at": "2026-05-27T12:31:06.120Z"
+  }
+},
+{
+  "model": "hospital.news",
+  "pk": 3,
+  "fields": {
+    "title": "День здоровья в Атнинском районе",
+    "slug": "den-zdorovya",
+    "content": "Приглашаем жителей на профилактический осмотр 15 октября.",
+    "excerpt": "Приглашаем жителей на профилактический осмотр 15 октября.",
+    "image": "",
+    "author": 1,
+    "is_published": true,
+    "created_at": "2026-05-27T12:31:06.125Z",
+    "updated_at": "2026-05-27T12:31:06.125Z"
+  }
+},
+{
+  "model": "hospital.feedback",
+  "pk": 1,
+  "fields": {
+    "name": "Тестовый Пользователь",
+    "email": "test@mail.ru",
+    "phone": "+7 (843) 522-12-00",
+    "subject": "Вопрос о записи",
+    "message": "Как записаться к терапевту через сайт?",
+    "user": null,
+    "status": "new",
+    "created_at": "2026-05-27T12:31:06.163Z",
+    "admin_comment": ""
+  }
+},
+{
+  "model": "hospital.patientinfo",
+  "pk": 1,
+  "fields": {
+    "title": "Подготовка к анализам",
+    "slug": "podgotovka-k-analizam",
+    "content": "Перед сдачей крови необходимо соблюдать голодание 8-12 часов. За сутки исключить алкоголь и жирную пищу.",
+    "category": "",
+    "order": 0,
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.patientinfo",
+  "pk": 2,
+  "fields": {
+    "title": "Документы для приёма",
+    "slug": "dokumenty-dlya-priema",
+    "content": "Паспорт, полис ОМС, СНИЛС. Для детей — свидетельство о рождении и полис.",
+    "category": "",
+    "order": 1,
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.patientinfo",
+  "pk": 3,
+  "fields": {
+    "title": "Права пациента",
+    "slug": "prava-pacienta",
+    "content": "Право на выбор врача, получение информации о состоянии здоровья, конфиденциальность медицинской информации.",
+    "category": "",
+    "order": 2,
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.patientinfo",
+  "pk": 4,
+  "fields": {
+    "title": "Платные услуги",
+    "slug": "platnye-uslugi",
+    "content": "Перечень платных медицинских услуг утверждён приказом главного врача. Стоимость уточняйте в регистратуре.",
+    "category": "",
+    "order": 3,
+    "is_active": true
+  }
+},
+{
+  "model": "hospital.hospitalinfo",
+  "pk": 1,
+  "fields": {
+    "title": "История",
+    "content": "Государственное автономное учреждение «Атнинская центральная районная больница» основано в 1952 году. За более чем 70 лет работы больница стала главным медицинским учреждением Атнинского района Республики Татарстан.",
+    "section": "about",
+    "order": 0
+  }
+},
+{
+  "model": "hospital.hospitalinfo",
+  "pk": 2,
+  "fields": {
+    "title": "Миссия",
+    "content": "Обеспечение доступной и качественной медицинской помощи жителям Атнинского района, внедрение современных методов диагностики и лечения.",
+    "section": "about",
+    "order": 1
+  }
+},
+{
+  "model": "hospital.hospitalinfo",
+  "pk": 3,
+  "fields": {
+    "title": "Структура",
+    "content": "Больница включает поликлиническое отделение, стационар на 120 коек, дневной стационар, отделение скорой медицинской помощи, клинико-диагностическую лабораторию.",
+    "section": "about",
+    "order": 2
+  }
+},
+{
+  "model": "documents.generateddocument",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "document_type": "schedule_docx",
+    "title": "Расписание Гарифуллин Айрат Рашитович",
+    "parameters": {
+      "doctor_id": 1
+    },
+    "created_at": "2026-05-27T12:31:42.487Z"
+  }
+},
+{
+  "model": "documents.generateddocument",
+  "pk": 2,
+  "fields": {
+    "user": 1,
+    "document_type": "feedback_xlsx",
+    "title": "Отчёт по заявкам (all_all)",
+    "parameters": {
+      "date_from": "None",
+      "date_to": "None"
+    },
+    "created_at": "2026-05-27T12:31:42.529Z"
+  }
+}
+]

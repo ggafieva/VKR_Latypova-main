@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container page-layout">
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <h3>Специалисты</h3>
+            <ul>
+                {% for doctor in doctors %}
+                <li><a href="{% url 'hospital:doctor_detail' doctor.slug %}">{{ doctor.full_name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </aside>
+    <div class="page-content">
+        <h1>Расписание работы специалистов</h1>
+        <table class="data-table responsive-table">
+            <thead>
+                <tr>
+                    <th>Врач</th>
+                    <th>Специальность</th>
+                    <th>День</th>
+                    <th>Время</th>
+                    <th>Кабинет</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in schedules %}
+                <tr>
+                    <td><a href="{% url 'hospital:doctor_detail' s.doctor.slug %}">{{ s.doctor.full_name }}</a></td>
+                    <td>{{ s.doctor.specialty }}</td>
+                    <td>{{ s.get_day_of_week_display }}</td>
+                    <td>{{ s.start_time|time:"H:i" }} – {{ s.end_time|time:"H:i" }}</td>
+                    <td>{{ s.room|default:s.doctor.cabinet|default:"—" }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5">Расписание формируется. Уточняйте в регистратуре.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

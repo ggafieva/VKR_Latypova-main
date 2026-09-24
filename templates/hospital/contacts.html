@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container page-content">
+    <h1>Контакты</h1>
+    <div class="contacts-grid">
+        <div class="contact-block">
+            <h2>Адрес</h2>
+            <p>{{ site_address }}</p>
+        </div>
+        <div class="contact-block">
+            <h2>Телефоны</h2>
+            <p>Регистратура: +7 (843) 522-12-34</p>
+            <p>Приёмная главного врача: +7 (843) 522-12-35</p>
+            <p>Скорая помощь: 103</p>
+        </div>
+        <div class="contact-block">
+            <h2>Email</h2>
+            <p>info@crb-atnya.ru</p>
+            <p>admin@crb-atnya.ru</p>
+        </div>
+        <div class="contact-block">
+            <h2>Режим работы</h2>
+            <p>Поликлиника: Пн–Пт 8:00–18:00, Сб 9:00–14:00</p>
+            <p>Стационар: круглосуточно</p>
+            <p>Неотложная помощь: 24/7</p>
+        </div>
+    </div>
+    <div class="map-placeholder">
+        <p>Карта проезда: координаты 56.2534° N, 49.8765° E</p>
+    </div>
+</div>
+{% endblock %}

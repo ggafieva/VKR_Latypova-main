@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container panel-layout">
+    {% include 'panel/includes/sidebar.html' %}
+    <div class="panel-content">
+        <h1>Управление расписанием</h1>
+        <table class="data-table">
+            <thead><tr><th>Врач</th><th>День</th><th>Время</th><th>Кабинет</th><th>DOCX</th></tr></thead>
+            <tbody>
+                {% for s in schedules %}
+                <tr>
+                    <td>{{ s.doctor.full_name }}</td>
+                    <td>{{ s.get_day_of_week_display }}</td>
+                    <td>{{ s.start_time|time:"H:i" }} – {{ s.end_time|time:"H:i" }}</td>
+                    <td>{{ s.room }}</td>
+                    <td><a href="{% url 'panel:schedule_docx' s.doctor.pk %}" class="btn btn-sm btn-primary">Скачать</a></td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5">Расписание пусто.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2>Скачать расписание врача (DOCX)</h2>
+        <ul>
+            {% for doctor in doctors %}
+            <li>{{ doctor.full_name }} — <a href="{% url 'panel:schedule_docx' doctor.pk %}">Скачать DOCX</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container page-content">
+    <h1>Новости</h1>
+    <div class="news-grid">
+        {% for news in news_items %}
+        <article class="news-card">
+            <time>{{ news.created_at|date:'d.m.Y' }}</time>
+            <h2><a href="{% url 'hospital:news_detail' news.slug %}">{{ news.title }}</a></h2>
+            <p>{{ news.excerpt|default:news.content|truncatewords:30 }}</p>
+        </article>
+        {% empty %}
+        <p>Новостей пока нет.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

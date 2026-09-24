@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container page-layout">
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <h3>Отделения</h3>
+            <ul>
+                {% for dept in departments %}
+                <li><a href="{% url 'hospital:department_detail' dept.slug %}">{{ dept.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </aside>
+    <div class="page-content">
+        <h1>Отделения и службы</h1>
+        <div class="cards-grid">
+            {% for dept in departments %}
+            <article class="card">
+                <h2><a href="{% url 'hospital:department_detail' dept.slug %}">{{ dept.name }}</a></h2>
+                <p>{{ dept.description|truncatewords:40 }}</p>
+                <p class="card-meta">
+                    {% if dept.floor %}Этаж: {{ dept.floor }}. {% endif %}
+                    {% if dept.beds_count %}Койки: {{ dept.beds_count }}. {% endif %}
+                    {% if dept.phone %}Тел.: {{ dept.phone }}{% endif %}
+                </p>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container page-content">
+    <h1>Медицинские услуги</h1>
+    <table class="data-table">
+        <thead><tr><th>Услуга</th><th>Отделение</th><th>Описание</th><th>Стоимость</th></tr></thead>
+        <tbody>
+            {% for service in services %}
+            <tr>
+                <td>{{ service.name }}</td>
+                <td>{{ service.department.name|default:"—" }}</td>
+                <td>{{ service.description|truncatewords:15 }}</td>
+                <td>{% if service.price %}{{ service.price }} ₽{% else %}По ОМС{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

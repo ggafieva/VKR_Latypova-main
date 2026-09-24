@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container page-content narrow">
+    <h1>Вход в систему</h1>
+    <form method="post" class="form">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<span class="field-error">{{ field.errors.0 }}</span>{% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Войти</button>
+    </form>
+    <p class="form-footer">Нет аккаунта? <a href="{% url 'accounts:register' %}">Зарегистрироваться</a></p>
+    <div class="demo-credentials">
+        <h3>Демо-учётные записи</h3>
+        <ul>
+            <li>Администратор: admin / password123</li>
+            <li>Врач: doctor1 / pass</li>
+            <li>Пациент: patient1 / pass</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

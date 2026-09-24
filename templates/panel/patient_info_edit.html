@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container panel-layout">
+    {% include 'panel/includes/sidebar.html' %}
+    <div class="panel-content">
+        <h1>{{ page_title }}</h1>
+        <p><a href="{% url 'panel:patient_info' %}">← К списку материалов</a></p>
+        <form method="post" enctype="multipart/form-data" class="form department-form">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger">{{ form.non_field_errors.0 }}</div>
+            {% endif %}
+            {% for field in form %}
+            <div class="form-group{% if field.name == 'is_active' %} form-check{% endif %}">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}<span class="field-error">{{ field.errors.0 }}</span>{% endif %}
+                {% if field.name == 'slug' %}
+                <small class="help-text">Можно оставить пустым — сгенерируется из заголовка</small>
+                {% endif %}
+                {% if field.name == 'content' %}
+                <small class="help-text">Текст на странице (необязательно, если есть только файл)</small>
+                {% endif %}
+                {% if field.name == 'attachment' %}
+                <small class="help-text">Памятка для скачивания: DOC, DOCX, PDF и др. Отображается на странице «Пациентам»</small>
+                {% endif %}
+            </div>
+            {% endfor %}
+            {% if item and item.attachment %}
+            <p class="help-text">Текущий файл: <a href="{{ item.attachment.url }}" target="_blank">{{ item.attachment.name }}</a></p>
+            {% endif %}
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

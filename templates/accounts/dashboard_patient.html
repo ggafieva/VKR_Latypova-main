@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container cabinet-layout">
+    {% include 'accounts/includes/cabinet_sidebar.html' %}
+    <div class="cabinet-content">
+        <h1>Личный кабинет</h1>
+        <p>Добро пожаловать, {{ user.get_full_name|default:user.username }}!</p>
+        <div class="quick-links">
+            <a href="{% url 'accounts:appointment_create' %}" class="btn btn-primary">Записаться на приём</a>
+            <a href="{% url 'accounts:my_appointments' %}" class="btn btn-outline">Мои заявки</a>
+        </div>
+        {% if my_appointments %}
+        <h2>Последние записи</h2>
+        <table class="data-table">
+            <thead><tr><th>Врач</th><th>Дата</th><th>Статус</th></tr></thead>
+            <tbody>
+                {% for a in my_appointments %}
+                <tr><td>{{ a.doctor.full_name }}</td><td>{{ a.appointment_date|date:"d.m.Y" }} {{ a.appointment_time|time:"H:i" }}</td><td>{{ a.get_status_display }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

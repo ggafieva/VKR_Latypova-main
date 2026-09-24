@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container cabinet-layout">
+    {% include 'accounts/includes/cabinet_sidebar.html' %}
+    <div class="cabinet-content">
+        <h1>Настройки уведомлений</h1>
+        <form method="post" class="form">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group form-check">
+                {{ field }}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

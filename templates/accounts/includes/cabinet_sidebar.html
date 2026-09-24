@@ -1,0 +1,20 @@
+<aside class="cabinet-sidebar">
+    <nav>
+        <h3>Личный кабинет</h3>
+        <ul>
+            <li><a href="{% url 'accounts:dashboard' %}">Обзор</a></li>
+            <li><a href="{% url 'accounts:profile' %}">Профиль</a></li>
+            <li><a href="{% url 'accounts:my_appointments' %}">Мои заявки</a></li>
+            <li><a href="{% url 'accounts:appointment_create' %}">Запись на приём</a></li>
+            <li><a href="{% url 'accounts:document_history' %}">Документы</a></li>
+            <li><a href="{% url 'accounts:notification_settings' %}">Уведомления</a></li>
+            {% if user.is_doctor_role %}
+            <li><a href="{% url 'accounts:doctor_schedule' %}">Моё расписание</a></li>
+            <li><a href="{% url 'accounts:doctor_feedbacks' %}">Заявки</a></li>
+            {% endif %}
+            {% if user.is_admin_role %}
+            <li><a href="{% url 'panel:dashboard' %}">Админ-панель</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</aside>

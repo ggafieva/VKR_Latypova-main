@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container cabinet-layout">
+    {% include 'accounts/includes/cabinet_sidebar.html' %}
+    <div class="cabinet-content">
+        <h1>Личный кабинет врача</h1>
+        {% if doctor %}
+        <p>Добро пожаловать, {{ doctor.full_name }}!</p>
+        <h2>Моё расписание</h2>
+        {% if my_schedules %}
+        <table class="data-table">
+            <thead><tr><th>День</th><th>Начало</th><th>Конец</th><th>Кабинет</th></tr></thead>
+            <tbody>
+                {% for s in my_schedules %}
+                <tr><td>{{ s.get_day_of_week_display }}</td><td>{{ s.start_time|time:"H:i" }}</td><td>{{ s.end_time|time:"H:i" }}</td><td>{{ s.room }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}<p>Расписание не заполнено.</p>{% endif %}
+        <a href="{% url 'accounts:doctor_schedule' %}" class="btn btn-primary">Редактировать расписание</a>
+        {% else %}
+        <p>Профиль врача не привязан к учётной записи.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

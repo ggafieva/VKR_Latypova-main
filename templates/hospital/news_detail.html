@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container page-content">
+    <h1>{{ article.title }}</h1>
+    <time class="news-date">{{ article.created_at|date:'d.m.Y H:i' }}</time>
+    <div class="text-content">{{ article.content|linebreaks }}</div>
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container page-layout">
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <h3>Врач</h3>
+            <ul>
+                <li><a href="{% url 'hospital:doctors' %}">← Все врачи</a></li>
+                <li><a href="{% url 'hospital:schedule' %}">Расписание</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <div class="page-content">
+        <div class="doctor-profile">
+            <div class="doctor-photo large">
+                {% if doctor.photo %}<img src="{{ doctor.photo.url }}" alt="{{ doctor.full_name }}">{% else %}<div class="photo-placeholder">{{ doctor.full_name|slice:":1" }}</div>{% endif %}
+            </div>
+            <div class="doctor-details">
+                <h1>{{ doctor.full_name }}</h1>
+                <p class="specialty">{{ doctor.specialty }}</p>
+                <p><strong>Отделение:</strong> <a href="{% url 'hospital:department_detail' doctor.department.slug %}">{{ doctor.department.name }}</a></p>
+                <p><strong>Квалификация:</strong> {{ doctor.qualification|default:"—" }}</p>
+                <p><strong>Стаж:</strong> {{ doctor.experience_years }} лет</p>
+                {% if doctor.cabinet %}<p><strong>Кабинет:</strong> {{ doctor.cabinet }}</p>{% endif %}
+                {% if doctor.phone %}<p><strong>Телефон:</strong> {{ doctor.phone }}</p>{% endif %}
+            </div>
+        </div>
+
+        <h2>О враче</h2>
+        <p>{{ doctor.bio|linebreaks }}</p>
+        {% if doctor.education %}
+        <h2>Образование</h2>
+        <p>{{ doctor.education|linebreaks }}</p>
+        {% endif %}
+
+        <h2>Расписание приёма</h2>
+        {% if schedules %}
+        <table class="data-table">
+            <thead><tr><th>День</th><th>Начало</th><th>Конец</th><th>Кабинет</th></tr></thead>
+            <tbody>
+                {% for s in schedules %}
+                <tr>
+                    <td>{{ s.get_day_of_week_display }}</td>
+                    <td>{{ s.start_time|time:"H:i" }}</td>
+                    <td>{{ s.end_time|time:"H:i" }}</td>
+                    <td>{{ s.room|default:doctor.cabinet }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>Расписание уточняйте в регистратуре.</p>
+        {% endif %}
+
+        {% if files %}
+        <h2>Документы</h2>
+        <ul class="file-list">
+            {% for f in files %}
+            <li><a href="{{ f.file.url }}" download>{{ f.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <a href="{% url 'accounts:appointment_create' %}" class="btn btn-primary">Записаться на приём</a>
+    </div>
+</div>
+{% endblock %}

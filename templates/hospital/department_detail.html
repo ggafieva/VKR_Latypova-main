@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container page-layout">
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <h3>Отделение</h3>
+            <ul>
+                <li><a href="{% url 'hospital:departments' %}">← Все отделения</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <div class="page-content">
+        <h1>{{ department.name }}</h1>
+        <div class="department-meta">
+            {% if department.phone %}<p><strong>Телефон:</strong> {{ department.phone }}</p>{% endif %}
+            {% if department.floor %}<p><strong>Этаж:</strong> {{ department.floor }}</p>{% endif %}
+            {% if department.beds_count %}<p><strong>Количество коек:</strong> {{ department.beds_count }}</p>{% endif %}
+        </div>
+        <p>{{ department.description|linebreaks }}</p>
+        {% if department.extra_info %}
+        <div class="content-block">
+            <h2>Дополнительная информация</h2>
+            <p>{{ department.extra_info|linebreaks }}</p>
+        </div>
+        {% endif %}
+
+        <h2>Врачи отделения</h2>
+        <div class="doctors-grid">
+            {% for doctor in doctors %}
+            <article class="doctor-card">
+                <h3><a href="{% url 'hospital:doctor_detail' doctor.slug %}">{{ doctor.full_name }}</a></h3>
+                <p class="specialty">{{ doctor.specialty }}</p>
+            </article>
+            {% empty %}
+            <p>Врачи не указаны.</p>
+            {% endfor %}
+        </div>
+
+        {% if services %}
+        <h2>Услуги</h2>
+        <ul class="services-list">
+            {% for service in services %}
+            <li><strong>{{ service.name }}</strong> — {{ service.description|truncatewords:20 }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

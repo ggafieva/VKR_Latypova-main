@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container page-layout">
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <h3>О больнице</h3>
+            <ul>
+                <li><a href="{% url 'hospital:about' %}" class="active">История</a></li>
+                <li><a href="{% url 'hospital:leadership' %}">Руководство</a></li>
+                <li><a href="{% url 'hospital:departments' %}">Отделения</a></li>
+                <li><a href="{% url 'hospital:news' %}">Новости</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <div class="page-content">
+        <h1>О больнице</h1>
+        {% for section in sections %}
+        <article class="content-block">
+            <h2>{{ section.title }}</h2>
+            <div class="text-content">{{ section.content|linebreaks }}</div>
+        </article>
+        {% empty %}
+        <article class="content-block">
+            <h2>История</h2>
+            <p>{{ site_name }} было основано в 1952 году и на протяжении более семи десятилетий оказывает медицинскую помощь жителям Атнинского района.</p>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

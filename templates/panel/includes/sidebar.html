@@ -1,0 +1,16 @@
+<aside class="panel-sidebar">
+    <nav>
+        <h3>Админ-панель</h3>
+        <ul>
+            <li><a href="{% url 'panel:dashboard' %}">Обзор</a></li>
+            <li><a href="{% url 'panel:departments' %}">Состав больницы</a></li>
+            <li><a href="{% url 'panel:doctors' %}">Врачи</a></li>
+            <li><a href="{% url 'panel:schedules' %}">Расписание</a></li>
+            <li><a href="{% url 'panel:users' %}">Пользователи</a></li>
+            <li><a href="{% url 'panel:feedbacks' %}">Заявки</a></li>
+            <li><a href="{% url 'panel:patient_info' %}">Пациентам</a></li>
+            <li><a href="{% url 'panel:files' %}">Файлы</a></li>
+            <li><a href="{% url 'accounts:dashboard' %}">← Личный кабинет</a></li>
+        </ul>
+    </nav>
+</aside>

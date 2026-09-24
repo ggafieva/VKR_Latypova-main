@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container panel-layout">
+    {% include 'panel/includes/sidebar.html' %}
+    <div class="panel-content">
+        <h1>{{ page_title }}</h1>
+        <p><a href="{% url 'panel:doctors' %}">← К списку врачей</a></p>
+        <form method="post" enctype="multipart/form-data" class="form department-form">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group{% if field.name == 'is_active' %} form-check{% endif %}">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}<span class="field-error">{{ field.errors.0 }}</span>{% endif %}
+                {% if field.name == 'department' %}<small class="help-text">Выберите отделение, к которому относится врач</small>{% endif %}
+                {% if field.name == 'slug' %}<small class="help-text">Латиница, например: ivanov-ivan. Можно оставить пустым — сгенерируется из ФИО</small>{% endif %}
+                {% if field.name == 'user' %}<small class="help-text">Привязка к учётной записи с ролью «Врач» (необязательно)</small>{% endif %}
+            </div>
+            {% endfor %}
+            {% if doctor and doctor.photo %}
+            <p class="help-text">Текущее фото: <a href="{{ doctor.photo.url }}" target="_blank">просмотр</a></p>
+            {% endif %}
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
