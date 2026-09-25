@@ -8,5 +8,5 @@ build:
   requirementsPath: VKR_Latypova-main/requirements.txt
 
 run:
-  command: python manage.py migrate && python manage.py load_initial_data && python manage.py runserver 0.0.0.0:80
+  command: cd VKR_Latypova-main && python manage.py migrate && python manage.py load_initial_data && python manage.py runserver 0.0.0.0:80
   containerPort: 80
