@@ -1,8 +1,7 @@
 meta:
-  environment: python
   toolchain:
     name: pip
-    version: 3.11
+    version: "3.11"
 
 build:
   requirementsPath: VKR_Latypova-main/requirements.txt
