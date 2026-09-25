@@ -7,7 +7,7 @@ SECRET_KEY = 'django-insecure-crb-atnya-vkr-2025-dev-key-change-in-production'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['djfhgjdl13://pythonanywhere.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
